@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
-  def index
+  def new
+    ActionCable.server.broadcast "game_notifications", {my: 'data'}
   end
 end
