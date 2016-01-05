@@ -5,6 +5,8 @@ module AgentGame
     ROCK = 2
     WATER = 3
 
+    attr_reader :data
+
     def initialize(width, height)
       @width, @height = width, height
       @diagonal = (((width**2) + (height**2)) ** 0.5).floor
@@ -28,9 +30,18 @@ module AgentGame
         y = Random.rand @height
         r = (@diagonal * radius).floor
         puts "#{terrain} --> (#{x}, #{y}) x #{r}"
-        add_circle terrain, x, y, r
+        add_square terrain, x, y, r
       end
     end
+
+    def add_square(terrain, x0, y0, length)
+      (x0...(x0+length)).each do |x|
+        (y0...(y0+length)).each do |y|
+          set_cell x, y, terrain
+        end
+      end
+    end
+
 
     # https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
     # TODO: Adapt to draw filled circles
@@ -40,14 +51,14 @@ module AgentGame
       decisionOver2 = 1 - x  # Decision criterion divided by 2 evaluated at x=r, y=0
 
       while y <= x do
-        set_square  x + x0,  y + y0, terrain # Octant 1
-        set_square  y + x0,  x + y0, terrain # Octant 2
-        set_square -x + x0,  y + y0, terrain # Octant 4
-        set_square -y + x0,  x + y0, terrain # Octant 3
-        set_square -x + x0, -y + y0, terrain # Octant 5
-        set_square -y + x0, -x + y0, terrain # Octant 6
-        set_square  x + x0, -y + y0, terrain # Octant 8
-        set_square  y + x0, -x + y0, terrain # Octant 7
+        set_cell  x + x0,  y + y0, terrain # Octant 1
+        set_cell  y + x0,  x + y0, terrain # Octant 2
+        set_cell -x + x0,  y + y0, terrain # Octant 4
+        set_cell -y + x0,  x + y0, terrain # Octant 3
+        set_cell -x + x0, -y + y0, terrain # Octant 5
+        set_cell -y + x0, -x + y0, terrain # Octant 6
+        set_cell  x + x0, -y + y0, terrain # Octant 8
+        set_cell  y + x0, -x + y0, terrain # Octant 7
         y += 1
       end
 
@@ -59,7 +70,7 @@ module AgentGame
       end
     end
 
-    def set_square(x, y, terrain)
+    def set_cell(x, y, terrain)
       if x >= 0 && y >= 0 && x < @width && y < @height
         @data[x][y] = terrain
       end
