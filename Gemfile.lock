@@ -142,6 +142,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     redis (3.2.2)
+    sass (3.4.20)
     spring (1.6.1)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -182,6 +183,7 @@ DEPENDENCIES
   jquery-rails
   puma
   rails (>= 5.0.0.beta1, < 5.1)
+  sass
   spring
   sqlite3
   turbolinks
