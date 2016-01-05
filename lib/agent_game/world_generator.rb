@@ -1,5 +1,5 @@
 module AgentGame
-  class World
+  class WorldGenerator
     GRASS = 0
     FOOD = 1
     ROCK = 2
@@ -10,13 +10,21 @@ module AgentGame
     def initialize(width, height)
       @width, @height = width, height
       @diagonal = (((width**2) + (height**2)) ** 0.5).floor
+    end
 
-      @data = Array.new(width) { Array.new(height) { GRASS } }
+    def generate(world)
+      @world = world
+
+      clear_world
       populate
     end
 
 
     private
+
+    def clear_world
+      @world.data = Array.new(@width) { Array.new(@height) { GRASS } }
+    end
 
     def populate
       add FOOD, patches: 5, radius: 0.1
@@ -72,7 +80,7 @@ module AgentGame
 
     def set_cell(x, y, terrain)
       if x >= 0 && y >= 0 && x < @width && y < @height
-        @data[x][y] = terrain
+        @world.data[x][y] = terrain
       end
     end
 
