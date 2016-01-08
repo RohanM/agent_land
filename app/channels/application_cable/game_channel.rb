@@ -1,4 +1,4 @@
-require 'agent_game/world_generator'
+require 'agent_game/game'
 
 class GameChannel < ApplicationCable::Channel
   def subscribed
@@ -6,11 +6,13 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def run_game
-    world = World.new
-    wg = AgentGame::WorldGenerator.new 320, 200
-    wg.generate world
+    game = AgentGame::Game.new
 
-    broadcast_world_state world
+    while game.running?
+      game.step
+      broadcast_world_state game.world
+    end
+
   end
 
 
