@@ -12,18 +12,16 @@ module AgentLand
       @diagonal = (((width**2) + (height**2)) ** 0.5).floor
     end
 
-    def generate(world)
-      @world = world
-
-      clear_world
+    def generate
+      clear
       populate
     end
 
 
     private
 
-    def clear_world
-      @world.data = Array.new(@width) { Array.new(@height) { GRASS } }
+    def clear
+      @data = Array.new(@width) { Array.new(@height) { GRASS } }
     end
 
     def populate
@@ -80,7 +78,7 @@ module AgentLand
 
     def set_cell(x, y, terrain)
       if x >= 0 && y >= 0 && x < @width && y < @height
-        @world.data[x][y] = terrain
+        @data[x][y] = terrain
       end
     end
 

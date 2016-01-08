@@ -7,7 +7,8 @@ module AgentLand
     def initialize
       @world = World.new
       wg = WorldGenerator.new 320, 200
-      wg.generate @world
+      wg.generate
+      @world.data = wg.data
 
       @frame = 0
     end
