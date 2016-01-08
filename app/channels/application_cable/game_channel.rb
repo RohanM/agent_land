@@ -1,4 +1,4 @@
-require 'agent_game/game'
+require 'agent_land/game'
 
 class GameChannel < ApplicationCable::Channel
   def subscribed
@@ -6,7 +6,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def run_game
-    game = AgentGame::Game.new
+    game = AgentLand::Game.new
 
     while game.running?
       game.step

@@ -1,6 +1,6 @@
-require 'agent_game/world_generator'
+require 'agent_land/world_generator'
 
-module AgentGame
+module AgentLand
   class Game
     attr_reader :world
 

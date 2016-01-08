@@ -1,4 +1,4 @@
-module AgentGame
+module AgentLand
   class WorldGenerator
     GRASS = 0
     FOOD = 1
