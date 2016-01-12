@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'agent_land/world_generator'
 
 module AgentLand
@@ -17,7 +18,7 @@ module AgentLand
         expect(wg.data.count).to eq width
         expect(wg.data[0].count).to eq height
 
-        all_grass = wg.data.all? { |col| col.all? { |cell| cell == WorldGenerator::GRASS } }
+        all_grass = wg.data.all? { |col| col.all? { |cell| cell == World::GRASS } }
         expect(all_grass).to be true
       end
 
