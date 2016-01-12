@@ -23,10 +23,12 @@ module AgentLand
     def add_agents
       @agents = []
 
-      ap = AgentPresence.new
-      @world.place ap
+      30.times do
+        ap = AgentPresence.new
+        @world.place ap
 
-      @agents << ap
+        @agents << ap
+      end
     end
 
     def running?
