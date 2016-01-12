@@ -10,16 +10,25 @@ class GameChannel < ApplicationCable::Channel
 
     while game.running?
       game.step
-      broadcast_world_state game.world
-    end
 
+      broadcast_game_state game
+    end
   end
 
 
   private
 
-  def broadcast_world_state world
-    broadcast type: 'world_state', world: world.data
+  def broadcast_game_state game
+    broadcast_world_state game
+    broadcast_agents_state game
+  end
+
+  def broadcast_world_state game
+    broadcast type: 'world_state', world: game.world_data
+  end
+
+  def broadcast_agents_state game
+    broadcast type: 'agents_state', agents: game.agents_data
   end
 
   def broadcast(data)

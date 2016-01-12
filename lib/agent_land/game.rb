@@ -36,5 +36,13 @@ module AgentLand
     def step
       @frame += 1
     end
+
+    def world_data
+      @world.data
+    end
+
+    def agents_data
+      @agents.map { |ap| {x: ap.x, y: ap.y} }
+    end
   end
 end
