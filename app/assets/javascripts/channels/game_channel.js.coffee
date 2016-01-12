@@ -1,8 +1,14 @@
 App.cable.subscriptions.create "GameChannel",
+  game: new Game
+
   connected: ->
     @perform "run_game"
 
   received: (data) ->
     console.log data
-    world = new World
-    world.draw data.world
+    if data.type == 'world_state'
+      @game.updateWorld data.world
+      @game.render()
+    else if data.type == 'agents_state'
+      @game.updateAgents data.agents
+      @game.render()
