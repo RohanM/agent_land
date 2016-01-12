@@ -4,7 +4,7 @@ require 'agent_land/agent_presence'
 describe World do
   let(:world) { World.new data: data }
   let(:data) { [[World::FOOD, World::ROCK], [World::WATER, World::GRASS]] }
-  let(:ap) { AgentLand::AgentPresence.new }
+  let(:ap) { AgentLand::AgentPresence.new(nil) }
 
   describe "placing agents" do
     # Because this is non-deterministic, run 10 times to gain confidence

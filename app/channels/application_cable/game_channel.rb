@@ -7,11 +7,12 @@ class GameChannel < ApplicationCable::Channel
 
   def run_game
     game = AgentLand::Game.new
+    broadcast_world_state game
 
     while game.running?
       game.step
 
-      broadcast_game_state game
+      broadcast_agents_state game
     end
   end
 

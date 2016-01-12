@@ -1,5 +1,6 @@
 require 'agent_land/world_generator'
 require 'agent_land/agent_presence'
+require 'agent_land/agents/simple_agent'
 
 module AgentLand
   class Game
@@ -24,7 +25,7 @@ module AgentLand
       @agents = []
 
       30.times do
-        ap = AgentPresence.new
+        ap = AgentPresence.new SimpleAgent.new
         @world.place ap
 
         @agents << ap
@@ -32,10 +33,13 @@ module AgentLand
     end
 
     def running?
-      @frame < 10
+      @frame < 1000
     end
 
     def step
+      # TODO: Alive agents only
+      @agents.each { |agent| agent.act!(self).apply(self) }
+
       @frame += 1
     end
 
