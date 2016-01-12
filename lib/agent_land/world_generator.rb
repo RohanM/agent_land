@@ -1,10 +1,5 @@
 module AgentLand
   class WorldGenerator
-    GRASS = 0
-    FOOD = 1
-    ROCK = 2
-    WATER = 3
-
     attr_reader :data
 
     def initialize(width, height)
@@ -21,13 +16,13 @@ module AgentLand
     private
 
     def clear
-      @data = Array.new(@width) { Array.new(@height) { GRASS } }
+      @data = Array.new(@width) { Array.new(@height) { World::GRASS } }
     end
 
     def populate
-      add FOOD, patches: 5, radius: 0.1
-      add WATER, patches: 3, radius: 0.2
-      add ROCK, patches: 3, radius: 0.2
+      add World::FOOD, patches: 5, radius: 0.1
+      add World::WATER, patches: 3, radius: 0.2
+      add World::ROCK, patches: 3, radius: 0.2
     end
 
     def add(terrain, patches: 5, radius: 0.1)
@@ -35,7 +30,7 @@ module AgentLand
         x = Random.rand @width
         y = Random.rand @height
         r = (@diagonal * radius).floor
-        puts "#{terrain} --> (#{x}, #{y}) x #{r}"
+        #puts "#{terrain} --> (#{x}, #{y}) x #{r}"
         add_square terrain, x, y, r
       end
     end
